@@ -1,0 +1,9 @@
+.btn-controls {
+  display: flex;
+}
+
+.btn-send {
+  margin-right: 10px;
+  border-radius: 5px;
+  padding: 10px;
+}

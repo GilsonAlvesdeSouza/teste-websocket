@@ -4,24 +4,35 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
     <title>Document</title>
   </head>
   <body>
-    <h1 id="count">teste</h1>
-    <form
-      action="http://localhost:3000/msg"
-      method="get"
-    >
-      <button>Iniciar</button>
-    </form>
+    <h1 id="count" style="height: 20px">00:00</h1>
+    <div class="btn-controls">
+      <form action="http://localhost:3000/iniciar" method="get">
+        <button class="btn-send">Iniciar</button>
+      </form>
+      <form action="http://localhost:3000/pausar" method="get">
+        <button class="btn-send">Pausar</button>
+      </form>
+      <form action="http://localhost:3000/continuar" method="get">
+        <button class="btn-send">Continuar</button>
+      </form>
+      <form action="http://localhost:3000/zerar" method="get">
+        <button class="btn-send">Zerar</button>
+      </form>
+    </div>
   </body>
   <script src="/socket.io/socket.io.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.4/dayjs.min.js"></script>
   <script>
     let count = document.getElementById("count");
     const socket = io();
-    socket.on("msg", (msg) => {
-      count.innerHTML = msg;
+    socket.on("seg", (seg) => {
+      let minFormt = seg.minutos < 10 ? `0${seg.minutos}` : seg.minutos;
+      let segFormt = seg.segundos < 10 ? `0${seg.segundos}` : seg.segundos;
+      count.innerHTML = minFormt + ":" + segFormt;
       console.log(msg);
     });
   </script>
